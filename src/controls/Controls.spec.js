@@ -33,7 +33,7 @@ describe('<Controls />', () => {
     });
 
     // check if lock button fires, display should change to unlocked
-    describe('"Close Gate" button click fires function', () => {
+    it('"Close Gate" button click fires function', () => {
       const { getByText } = render(<Controls toggleClosed={mock} />);
 
       const closeGate = getByText(/close gate/i);
@@ -42,7 +42,7 @@ describe('<Controls />', () => {
       expect(mock).toHaveBeenCalled();
     });
 
-    describe('"Open Gate" button click fires function', () => {
+    it('"Open Gate" button click fires function', () => {
       const { getByText } = render(
         <Controls toggleClosed={mock} closed={true} />
       );
@@ -53,7 +53,7 @@ describe('<Controls />', () => {
       expect(mock).toHaveBeenCalled();
     });
 
-    describe('"Lock Gate" button click fires function', () => {
+    it('"Lock Gate" button click fires function', () => {
       const { getByText } = render(
         <Controls toggleLocked={mock} closed={true} />
       );
@@ -64,7 +64,7 @@ describe('<Controls />', () => {
       expect(mock).toHaveBeenCalled();
     });
 
-    describe('"Unlock Gate" button click fires function', () => {
+    it('"Unlock Gate" button click fires function', () => {
       const { getByText } = render(
         <Controls toggleLocked={mock} closed={true} locked={true} />
       );
@@ -74,5 +74,25 @@ describe('<Controls />', () => {
       fireEvent.click(unlockGate);
       expect(mock).toHaveBeenCalled();
     });
+
+    // it('"Lock Gate" button cannot fire function when gate is open', () => {
+    //   const { getByText } = render(<Controls />);
+
+    //   const lockGate = getByText(/lock gate/i);
+
+    //   fireEvent.click(lockGate);
+    //   expect(mock).not.toHaveBeenCalled();
+    // });
+
+    // it('"Open Gate" button click does not fire function if gate is locked', () => {
+    //   const { getByText } = render(
+    //     <Controls toggleLocked={mock} closed={true} locked={true} />
+    //   );
+
+    //   const unlockGate = getByText(/unlock gate/i);
+
+    //   fireEvent.click(unlockGate);
+    //   expect(mock).toHaveBeenCalled();
+    // });
   });
 });
