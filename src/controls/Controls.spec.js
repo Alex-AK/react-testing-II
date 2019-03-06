@@ -29,5 +29,28 @@ describe('<Controls />', () => {
       expect(button.textContent).toBe('Close Gate');
       expect(button.disabled).toBeFalsy();
     });
+
+    // check if lock button fires, display should change to unlocked
+    describe('"Close Gate" button click fires function', () => {
+      const mock = jest.fn();
+      const { getByText } = render(<Controls toggleClosed={mock} />);
+
+      const closeGate = getByText(/close gate/i);
+
+      fireEvent.click(closeGate);
+      expect(mock).toHaveBeenCalled();
+    });
+
+    describe('"Open Gate" button click fires function', () => {
+      const mock = jest.fn();
+      const { getByText } = render(<Controls toggleClosed={mock} />);
+
+      const openGate = getByText(/open gate/i);
+
+      fireEvent.click(openGate);
+      expect(mock).toHaveBeenCalled();
+    });
+    // describe('"Lock Gate" button click fires function', () => {});
+    // describe('"Unlock Gate" button click fires function', () => {});
   });
 });

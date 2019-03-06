@@ -26,4 +26,13 @@ describe('<Display />', () => {
 
     expect(display.textContent).toBe('Open');
   });
+
+  // if we have a prop locked = true, it expects class ... target class name and verify
+  // expect(close.disabled).toBe(false);
+  // expect(lock.disabled).toBe(true);
+
+  // describe('"Open Gate" button changes open/close display to open', () => {});
+  // describe('"Close Gate" button changes open/close display to closed', () => {});
+  // describe('"Lock Gate" button changes lock/unlock display to locked', () => {});
+  // describe('"Unlock Gate" button changes lock/unlock display to unlocked', () => {});
 });
