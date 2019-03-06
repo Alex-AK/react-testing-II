@@ -4,6 +4,8 @@ import 'react-testing-library/cleanup-after-each'; // cleans up after all tests 
 
 import Controls from './Controls';
 
+const mock = jest.fn();
+
 describe('<Controls />', () => {
   it('renders without failing', () => {
     render(<Controls />);
@@ -32,7 +34,6 @@ describe('<Controls />', () => {
 
     // check if lock button fires, display should change to unlocked
     describe('"Close Gate" button click fires function', () => {
-      const mock = jest.fn();
       const { getByText } = render(<Controls toggleClosed={mock} />);
 
       const closeGate = getByText(/close gate/i);
@@ -42,15 +43,36 @@ describe('<Controls />', () => {
     });
 
     describe('"Open Gate" button click fires function', () => {
-      const mock = jest.fn();
-      const { getByText } = render(<Controls toggleClosed={mock} />);
+      const { getByText } = render(
+        <Controls toggleClosed={mock} closed={true} />
+      );
 
       const openGate = getByText(/open gate/i);
 
       fireEvent.click(openGate);
       expect(mock).toHaveBeenCalled();
     });
-    // describe('"Lock Gate" button click fires function', () => {});
-    // describe('"Unlock Gate" button click fires function', () => {});
+
+    describe('"Lock Gate" button click fires function', () => {
+      const { getByText } = render(
+        <Controls toggleLocked={mock} closed={true} />
+      );
+
+      const lockGate = getByText(/lock gate/i);
+
+      fireEvent.click(lockGate);
+      expect(mock).toHaveBeenCalled();
+    });
+
+    describe('"Unlock Gate" button click fires function', () => {
+      const { getByText } = render(
+        <Controls toggleLocked={mock} closed={true} locked={true} />
+      );
+
+      const unlockGate = getByText(/unlock gate/i);
+
+      fireEvent.click(unlockGate);
+      expect(mock).toHaveBeenCalled();
+    });
   });
 });
