@@ -1,6 +1,9 @@
 import React from 'react';
 import { render, fireEvent } from 'react-testing-library';
 
+import 'react-testing-library/cleanup-after-each'; // cleans up after all tests across app
+import 'jest-dom/extend-expect';
+
 import Dashboard from './Dashboard';
 
 describe('<Dashboard />', () => {
@@ -8,16 +11,24 @@ describe('<Dashboard />', () => {
     render(<Dashboard />);
   });
 
-  // check initial state of lock gate and close gate
+  // check if lock button fires, display should change to unlocked
+  describe('"Close Gate" button click fires function', () => {
+    const { getByText } = render(<Dashboard />);
+    const mock = jest.fn(() => 'hello');
 
-  // button has disable property on it. ie disable=true
+    const openButton = getByText(/close gate/i);
 
-  // test on dashboard ?
-  // check if lock button fires
-  // check that lock button can only fire when gate is open and unlocked
+    fireEvent.click(openButton);
+    expect(mock).toHaveBeenCalled();
+  });
+  // describe('"Open Gate" button click fires function', () => {});
+  // describe('"Lock Gate" button click fires function', () => {});
+  // describe('"Unlock Gate" button click fires function', () => {});
 
-  // check if close button fires
-  // check that close button can only fire when gate is open and unlocked
+  // describe('"Open Gate" button changes open/close display to open', () => {});
+  // describe('"Close Gate" button changes open/close display to closed', () => {});
+  // describe('"Lock Gate" button changes lock/unlock display to locked', () => {});
+  // describe('"Unlock Gate" button changes lock/unlock display to unlocked', () => {});
 });
 
 // tips

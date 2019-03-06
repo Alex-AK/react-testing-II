@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from 'react-testing-library';
+import 'react-testing-library/cleanup-after-each'; // cleans up after all tests across app
 
 import Controls from './Controls';
 
@@ -8,10 +9,8 @@ describe('<Controls />', () => {
     render(<Controls />);
   });
 
-  // check if controls render
-
   describe('buttons', () => {
-    it('lock button renders with default disabled', () => {
+    it('lock button renders with default set to disabled', () => {
       const { getByText } = render(<Controls />);
 
       const button = getByText(/lock gate/i);
@@ -22,7 +21,7 @@ describe('<Controls />', () => {
   });
 
   describe('buttons', () => {
-    it('close button renders with default enabled', () => {
+    it('close button renders with default set to enabled', () => {
       const { getByText } = render(<Controls />);
 
       const button = getByText(/close gate/i);

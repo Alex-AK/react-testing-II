@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from 'react-testing-library';
+import 'react-testing-library/cleanup-after-each'; // cleans up after all tests across app
 
 import Display from './Display';
 
