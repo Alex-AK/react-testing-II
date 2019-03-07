@@ -11,7 +11,7 @@ describe('<Controls />', () => {
     render(<Controls />);
   });
 
-  describe('buttons', () => {
+  describe('button text', () => {
     it('lock button renders with default set to disabled', () => {
       const { getByText } = render(<Controls />);
 
@@ -75,8 +75,22 @@ describe('<Controls />', () => {
       expect(mock).toHaveBeenCalled();
     });
 
+    // still working on this one.
+    it.skip('Cannot open gate if it is locked', () => {
+      const { getByText } = render(
+        <Controls toggleLocked={mock} closed={true} locked={true} />
+      );
+
+      const button = getByText(/open gate/i);
+
+      expect(button.disabled).toBeTruthy();
+      // why does this button fire if it's disabled?
+      fireEvent.click(button);
+      expect(mock).toHaveBeenCalled();
+    });
+
     // it('"Lock Gate" button cannot fire function when gate is open', () => {
-    //   const { getByText } = render(<Controls />);
+    //   const { getByText } = render(<Controls closed={true} />);
 
     //   const lockGate = getByText(/lock gate/i);
 
