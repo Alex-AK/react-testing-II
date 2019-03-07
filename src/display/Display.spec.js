@@ -69,9 +69,15 @@ describe('<Display />', () => {
 
         expect(closedButton.className).toEqual('led red-led');
         expect(lockedButton.className).toEqual('led red-led');
+      });
+      it('if class is green-led, display green background', () => {
+        const { getByText } = render(<Display closed={false} locked={false} />);
 
-        // both buttons should have class red-led
-        // expect buttons to have class 'red-lef'
+        const openedButton = getByText('Open');
+        const unlockedButton = getByText('Unlocked');
+
+        expect(openedButton.className).toEqual('led green-led');
+        expect(unlockedButton.className).toEqual('led green-led');
       });
     });
   });
