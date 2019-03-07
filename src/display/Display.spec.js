@@ -61,8 +61,18 @@ describe('<Display />', () => {
     });
 
     describe('conditional light display ', () => {
-      // target class
-      // expect class to be red
+      it('if class is red-led, display red background', () => {
+        const { getByText } = render(<Display closed={true} locked={true} />);
+
+        const closedButton = getByText('Closed');
+        const lockedButton = getByText('Locked');
+
+        expect(closedButton.className).toEqual('led red-led');
+        expect(lockedButton.className).toEqual('led red-led');
+
+        // both buttons should have class red-led
+        // expect buttons to have class 'red-lef'
+      });
     });
   });
 });

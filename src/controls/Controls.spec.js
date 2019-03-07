@@ -86,27 +86,21 @@ describe('<Controls />', () => {
       expect(button.disabled).toBeTruthy();
       // why does this button fire if it's disabled?
       fireEvent.click(button);
-      expect(mock).toHaveBeenCalled();
+      expect(mock).not.toHaveBeenCalled();
     });
 
-    // it('"Lock Gate" button cannot fire function when gate is open', () => {
-    //   const { getByText } = render(<Controls closed={true} />);
+    // still working on this one.
+    it.skip('Cannot lock gate if it is opened', () => {
+      const { getByText } = render(
+        <Controls toggleLocked={mock} closed={false} locked={false} />
+      );
 
-    //   const lockGate = getByText(/lock gate/i);
+      const button = getByText(/lock gate/i);
 
-    //   fireEvent.click(lockGate);
-    //   expect(mock).not.toHaveBeenCalled();
-    // });
-
-    // it('"Open Gate" button click does not fire function if gate is locked', () => {
-    //   const { getByText } = render(
-    //     <Controls toggleLocked={mock} closed={true} locked={true} />
-    //   );
-
-    //   const unlockGate = getByText(/unlock gate/i);
-
-    //   fireEvent.click(unlockGate);
-    //   expect(mock).toHaveBeenCalled();
-    // });
+      expect(button.disabled).toBeTruthy();
+      // why does this button fire if it's disabled?
+      fireEvent.click(button);
+      expect(mock).not.toHaveBeenCalled();
+    });
   });
 });
